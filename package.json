@@ -1,0 +1,29 @@
+{
+  "name": "baldr",
+  "private": true,
+  "workspaces": {
+    "packages": [ "packages/*" ],
+    "nohoist": [ "**" ]
+  },
+  "version": "1.0.0",
+  "scripts": {
+    "start": "lerna exec --scope @baldr/box -- make start",
+    "restart": "lerna exec --scope @baldr/box -- make restart",
+    "build": "lerna exec --scope @baldr/box -- make build",
+    "stop": "lerna exec --scope @baldr/box -- make stop",
+    "logs": "lerna exec --scope @baldr/box -- yarn logs",
+    "build:box:client:dev": "lerna exec --scope @baldr/box -- yarn build:client:dev",
+    "build:box:client:production": "lerna exec --scope @baldr/box -- yarn build:client:production",
+    "bootstrap": "lerna bootstrap",
+    "test": "lerna exec --scope @baldr/core -- yarn test && lerna exec --scope @baldr/box -- yarn test",
+    "lint": "lerna run lint",
+    "ls": "lerna ls"
+  },
+  "devDependencies": {
+    "lerna": "^3.16.4"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}

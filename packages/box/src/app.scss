@@ -1,0 +1,19 @@
+@import url('https://fonts.googleapis.com/css?family=Libre+Baskerville&display=swap');
+
+* {
+  box-sizing: border-box;
+  font-family: 'Libre Baskerville', serif;
+}
+
+*:focus {
+  outline: 0 !important;
+}
+
+a {
+  color: $black;
+}
+
+a:hover {
+  text-decoration: none;
+  color: $black;
+}
