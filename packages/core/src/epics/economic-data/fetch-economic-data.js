@@ -24,11 +24,13 @@ const indicatorsKeys = {
 };
 
 const serializeData = (data, key) => {
-  if (isEmptyOrNil(data)) return [];
+  if (isEmptyOrNil(data)) {
+    return { date: null, data: null };
+  }
 
   return {
     date: data.date,
-    economicData: data[indicatorsKeys[key]],
+    data: data[indicatorsKeys[key]],
   };
 };
 
@@ -38,12 +40,10 @@ export const fetchEconomicDataEpic = (action$, state$, { ajax }) => action$.pipe
     url: getEconomicDataByDate(indicator, date),
     method: 'GET',
   }).pipe(
-    switchMap(({ response }) => {
-      console.log(response, 'response');
-
-      return of(setEconomicData(serializeData(response[0], indicator)));
-    })
-  )),
+    switchMap(({ response }) => of(
+      setEconomicData(serializeData(response[0], indicator))
+    )))
+  ),
   catchError((err) => {
     console.log(err, 'err economicValues');
 

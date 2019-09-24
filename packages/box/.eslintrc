@@ -8,6 +8,19 @@
     "ramda",
     "jest"
   ],
+  "settings": {
+    "import/resolver": {
+      "babel-module": {
+        "modules": "./node_modules",
+        "core": "./node_modules/@baldr/core/src",
+        "components": "./src/components",
+        "helpers": "./src/helpers",
+        "hocs": "./src/hocs",
+        "constants": "./src/constants",
+        "customizations": "./src/customizations"
+      }
+    }
+  },
   "globals": {
     "document": true,
     "window": true,

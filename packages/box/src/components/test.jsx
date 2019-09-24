@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 
-import { socket } from '../ws/ws';
+import { socket } from 'core/ws/ws';
 
 export const Test = () => {
   const [state, setState] = useState({ message: '', count: 0 });

@@ -1,0 +1,12 @@
+{
+  "eslint.workingDirectories": [
+    {
+      "directory": "packages/box",
+      "changeProcessCWD": true
+    },
+    {
+      "directory": "packages/core",
+      "changeProcessCWD": true
+    }
+  ]
+}

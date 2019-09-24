@@ -5,9 +5,10 @@ import Button from '@material-ui/core/Button';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import * as R from 'ramda';
 
+import { validateSignIn } from 'core/helpers/sign-up';
+import { FORM } from 'core/constants';
+
 import { CssTextField, fields } from './material-ui';
-import { validateSignIn } from '../../../helpers/sign-up';
-import { FORM } from '../../../constants';
 
 import './sign-in.scss';
 

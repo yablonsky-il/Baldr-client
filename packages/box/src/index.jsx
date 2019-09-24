@@ -1,4 +1,4 @@
-import { initApp } from 'core/main';
+import { initApp } from 'core';
 import { App } from './app';
 
 initApp(App);

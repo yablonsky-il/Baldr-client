@@ -9,19 +9,22 @@ import {
 const getInitialState = () => ({
   isInProgress: false,
   isFetched: false,
-  data: null,
+  economicData: {
+    date: null,
+    data: null,
+  },
 });
 
-export const economicData = handleActions({
+export const macroEconomicData = handleActions({
   [fetchEconomicData]: state => ({
     ...state,
     isInProgress: true,
   }),
-  [setEconomicData]: (state, { payload }) => ({
+  [setEconomicData]: (state, { payload: { date, data } }) => ({
     ...state,
     isInProgress: false,
     isFetched: true,
-    data: payload,
+    economicData: { date, data },
   }),
   [clearEconomicData]: getInitialState,
 }, getInitialState());

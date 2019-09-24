@@ -1,7 +1,7 @@
 import TextField from '@material-ui/core/TextField';
 import { withStyles } from '@material-ui/core/styles';
 
-import { FORM } from '../../../constants';
+import { FORM } from 'core/constants';
 
 export const CssTextField = withStyles({
   root: {

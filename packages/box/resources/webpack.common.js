@@ -8,8 +8,6 @@ const BABEL_INCLUDE = [
   path.resolve('src'),
 ];
 
-console.log(BABEL_INCLUDE);
-
 module.exports = {
   target: 'web',
   entry: path.join(path.resolve(), 'src/index.jsx'),
@@ -48,6 +46,9 @@ module.exports = {
     modules: [path.resolve('src'), 'node_modules'],
     extensions: ['*', '.js', '.jsx', '.scss'],
     symlinks: false,
+    alias: {
+      react: path.resolve('node_modules/@baldr/core/node_modules/react')
+    }
   },
   plugins: [
     new HtmlWebpackPlugin({

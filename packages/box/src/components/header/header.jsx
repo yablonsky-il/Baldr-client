@@ -1,10 +1,8 @@
-import React, { memo } from 'react';
-import { connect } from 'react-redux';
-import * as R from 'ramda';
+import React from 'react';
 
-import { sendRegistrationData as sendRegistrationDataAction } from '../../actions/sign-up';
-import { sendAuthenticationData as sendAuthenticationDataAction } from '../../actions/sign-in';
-import { signOut as signOutAction } from '../../actions/sign-out';
+import { withCore } from 'core/hocs/with-core-component';
+import { Header as HeaderCore } from 'core/components/header/header';
+
 import { SignIn } from './sign-in/sign-in';
 import { SignUp } from './sign-up/sign-up';
 import { Profile } from './profile/profile';
@@ -46,24 +44,4 @@ const HeaderUI = ({
   </header>
 );
 
-const mapStateToProps = ({ signUp, signIn, userProfile }) => ({
-  signUp,
-  signIn,
-  userProfile,
-});
-
-const mapDispatchToProps = {
-  sendRegistrationData: sendRegistrationDataAction,
-  sendAuthenticationData: sendAuthenticationDataAction,
-  signOut: signOutAction,
-};
-
-export const Header = memo(connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(HeaderUI), (prevProps, nextProps) => {
-  console.log(prevProps, 'prevProps from Header');
-  console.log(nextProps, 'nextProps from Header');
-
-  return !R.equals(prevProps.userProfile, nextProps.userProfile);
-});
+export const Header = withCore(HeaderCore, HeaderUI);

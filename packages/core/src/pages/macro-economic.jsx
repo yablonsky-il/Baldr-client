@@ -54,26 +54,32 @@ export class MacroEconomicUI extends PureComponent {
 
   render() {
     const { selectedDate } = this.state;
-    const { children, location: { pathname } } = this.props;
+    const {
+      children,
+      location: { pathname },
+      economicData,
+    } = this.props;
 
-    console.log(this.props, 'this. props');
+    console.log(this.props, 'this. props from core');
 
     return children({
       pathname,
       selectedDate,
+      economicData,
       setDate: this.setDate,
     });
   }
 }
 
-const mapStateToProps = state => ({
-
+const mapStateToProps = ({
+  macroEconomicData: { economicData },
+}) => ({
+  economicData,
 });
 
 const mapDispatchToProps = {
   fetchEconomicData: fetchEconomicDataAction,
 };
-
 export const MacroEconomic = withRouter(connect(
   mapStateToProps,
   mapDispatchToProps,
