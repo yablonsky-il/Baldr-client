@@ -1,5 +1,6 @@
 import React from 'react';
 import Container from '@material-ui/core/Container';
+import PropTypes from 'prop-types';
 
 import { withCore } from 'core/hocs/with-core-component';
 import { MacroEconomic as MacroEcomoicCore } from 'core/pages/macro-economic';
@@ -32,5 +33,12 @@ export const MacroEconomicUI = ({
     />
   </Container>
 );
+
+MacroEconomicUI.propTypes = {
+  economicData: PropTypes.shape({}).isRequired,
+  selectedDate: PropTypes.shape({}).isRequired,
+  pathname: PropTypes.string.isRequired,
+  setDate: PropTypes.func.isRequired,
+};
 
 export const MacroEconomic = withCore(MacroEcomoicCore, MacroEconomicUI);

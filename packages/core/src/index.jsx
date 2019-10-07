@@ -4,13 +4,16 @@ import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 
 import { configureStore } from './store/store';
+import { App as AppCore } from './app';
 
 const store = configureStore();
 
-export const initApp = AppComponent => render(
+export const initApp = AppUI => render(
   <Provider store={store}>
     <BrowserRouter>
-      <AppComponent />
+      <AppCore>
+        <AppUI />
+      </AppCore>
     </BrowserRouter>
   </Provider>,
   document.getElementById('root'),

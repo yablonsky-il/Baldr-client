@@ -9,22 +9,36 @@ import TableRow from '@material-ui/core/TableRow';
 
 import { isEmptyOrNil } from 'core/helpers/util';
 
-const columns = [
+const columnKeys = {
+  stocks: 'stock',
+  currency: 'currency',
+  inflation: 'country',
+  commodities: 'commoditie',
+  'interest-rate': 'country',
+  'sales-tax-rate': 'country',
+  'corruption-rank': 'country',
+  'corporate-tax-rate': 'country',
+  'government-debt-to-GDP': 'country',
+  'personal-income-tax-rate': 'country',
+};
+
+const getColumns = indicator => ([
   { id: 'id', label: 'ID', minWidth: 200 },
-  { id: 'country', label: 'Country', minWidth: 200 },
-  { id: 'value', label: 'Value', minWidth: 200 },
-];
+  { id: 'country', label: columnKeys[indicator], minWidth: 200 },
+  { id: 'value', label: 'VALUE', minWidth: 200 },
+]);
 
 const ROWS_AMOUNT = 15;
 
 export const EconomicDataTable = ({
   pathname,
-  economicData: { date, data },
+  economicData: { date, data, indicator },
 }) => {
   if (isEmptyOrNil(data)) return null;
 
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(ROWS_AMOUNT);
+  const thValue = columnKeys[indicator];
 
   function handleChangePage(event, newPage) {
     setPage(newPage);
@@ -40,8 +54,8 @@ export const EconomicDataTable = ({
       <div>
         <Table stickyHeader>
           <TableHead>
-            <TableRow>
-              {columns.map(column => (
+            <TableRow className="text-uppercase">
+              {getColumns(indicator).map(column => (
                 <TableCell
                   key={column.id}
                   style={{ minWidth: column.minWidth }}
@@ -53,11 +67,11 @@ export const EconomicDataTable = ({
           </TableHead>
 
           <TableBody>
-            {data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(({ id, country, value }) => (
-              <TableRow hover role="checkbox" tabIndex={-1} key={id}>
-                <TableCell>{id}</TableCell>
-                <TableCell>{country}</TableCell>
-                <TableCell>{value}</TableCell>
+            {data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(rowData => (
+              <TableRow hover role="checkbox" tabIndex={-1} key={rowData.id}>
+                <TableCell>{rowData.id}</TableCell>
+                <TableCell>{rowData[thValue]}</TableCell>
+                <TableCell>{rowData.value}</TableCell>
               </TableRow>
             ))}
           </TableBody>

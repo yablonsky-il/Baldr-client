@@ -6,7 +6,7 @@ import { Header as HeaderCore } from 'core/components/header/header';
 import { SignIn } from './sign-in/sign-in';
 import { SignUp } from './sign-up/sign-up';
 import { Profile } from './profile/profile';
-import { DrawerMenu } from './drawer/drawer';
+import { DrawerMenu } from '../drawer/drawer';
 
 import './header.scss';
 

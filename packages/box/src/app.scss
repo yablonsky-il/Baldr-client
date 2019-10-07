@@ -1,8 +1,7 @@
-@import url('https://fonts.googleapis.com/css?family=Libre+Baskerville&display=swap');
-
 * {
   box-sizing: border-box;
   font-family: 'Libre Baskerville', serif;
+  -webkit-overflow-scrolling: touch;
 }
 
 *:focus {

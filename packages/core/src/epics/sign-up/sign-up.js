@@ -4,26 +4,14 @@ import { switchMap, catchError } from 'rxjs/operators';
 
 import { sendRegistrationData, setRegistrationStatus } from '../../actions/sign-up';
 import { setUserProfile } from '../../actions/profile';
-import { SIGN_UP_STATUSES } from '../../constants';
-
-// {
-//   url: 'https://httpbin.org/post',
-//   method: 'POST',
-//   headers: {
-//     'Content-Type': 'application/json',
-//     'x-rxjs-is': 'Awesome!'
-//   },
-//   body: {
-//     hello: 'World!',
-//   }
-// }
+import { SIGN_UP_STATUSES, API_URL } from '../../constants';
 
 export const signUpEpic = (action$, state$, { ajax }) =>
   action$.pipe(
     ofType(sendRegistrationData),
     switchMap(({ payload: formData }) =>
       ajax({
-        url: '/api/sign-up',
+        url: `${API_URL}/sign-up`,
         method: 'POST',
         body: formData,
       }).pipe(

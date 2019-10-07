@@ -1,0 +1,25 @@
+html {
+  position: relative;
+  font-size: 16px;
+  min-height: 100%;
+}
+
+a {
+  color: $black;
+
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+ul {
+  list-style: none;
+}
+
+.fill-gray {
+  fill: $gray;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}

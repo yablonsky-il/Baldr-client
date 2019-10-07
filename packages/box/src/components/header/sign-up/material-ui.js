@@ -16,7 +16,7 @@ export const CssTextField = withStyles({
 
 export const fields = [
   {
-    className: 'sign-up-form-input',
+    className: 'w-100 sign-up-form-input',
     id: FORM.NAME,
     label: 'Name',
     placeholder: 'Your name',
@@ -25,7 +25,7 @@ export const fields = [
     title: 'Name should be more 2 characters',
   },
   {
-    className: 'sign-up-form-input',
+    className: 'w-100 sign-up-form-input',
     id: FORM.SURNAME,
     label: 'Surname',
     placeholder: 'Your surname',
@@ -34,7 +34,7 @@ export const fields = [
     title: 'Surname should be more 2 characters',
   },
   {
-    className: 'sign-up-form-input',
+    className: 'w-100 sign-up-form-input',
     id: FORM.EMAIL,
     label: 'Email',
     placeholder: 'Your email',
@@ -43,7 +43,7 @@ export const fields = [
     title: 'Enter your email',
   },
   {
-    className: 'sign-up-form-input',
+    className: 'w-100 sign-up-form-input',
     id: FORM.PASSWORD,
     label: 'Password',
     placeholder: 'Your password',

@@ -6,16 +6,16 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 
-import { IconMenu } from '../../icons/icons-drawer/icon-menu';
-import { IconStatistic } from '../../icons/icons-drawer/icon-statistic';
-import { IconHome } from '../../icons/icons-drawer/icon-home';
-import { IconWebChat } from '../../icons/icons-drawer/icon-web-chat';
+import { IconMenu } from '../icons/icons-drawer/icon-menu';
+import { IconStatistic } from '../icons/icons-drawer/icon-statistic';
+import { IconHome } from '../icons/icons-drawer/icon-home';
+import { IconWebChat } from '../icons/icons-drawer/icon-web-chat';
 
 import './drawer.scss';
 
 const listItems = [
   { item: 'Home', icon: <IconHome className="fill-gray" />, href: '/' },
-  { item: 'MacroEcomoic statistic', icon: <IconStatistic className="fill-gray" />, href: '/macro-economic/stocks' },
+  { item: 'MEconomic Statistic', icon: <IconStatistic className="fill-gray" />, href: '/macro-economic/stocks' },
   { item: 'WebChat', icon: <IconWebChat className="fill-gray" />, href: '/web-chat' },
 ];
 
@@ -54,14 +54,20 @@ export const DrawerUI = () => {
 
   return (
     <div className="drawer">
-      <span className="cursor-pointer" onClick={toggleDrawer(true)}>
+      <span
+        className="cursor-pointer"
+        onClick={toggleDrawer(true)}
+        onKeyPress={toggleDrawer(true)}
+        role="button"
+        tabIndex="0"
+      >
         <IconMenu className="fill-gray" />
       </span>
       <Drawer open={isOpen} onClose={toggleDrawer(false)}>
         {sideList('left')}
       </Drawer>
     </div>
-  )
-}
+  );
+};
 
 export const DrawerMenu = memo(DrawerUI);

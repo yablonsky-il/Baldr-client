@@ -5,7 +5,7 @@ import Button from '@material-ui/core/Button';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import * as R from 'ramda';
 
-import { validateSignIn } from 'core/helpers/sign-up';
+import { validateSignIn, updateForm, sendForm } from 'core/helpers/forms';
 import { FORM } from 'core/constants';
 
 import { CssTextField, fields } from './material-ui';
@@ -26,13 +26,6 @@ export class SignIn extends Component {
       },
     },
   };
-
-  shouldComponentUpdate(nextProps) {
-    console.log(this.props, 'prevProps from SignIn');
-    console.log(nextProps, 'nextProps from SignIn');
-
-    return true;
-  }
 
   toggle = () => this.setState(prevState => ({
     ...prevState,
@@ -59,21 +52,17 @@ export class SignIn extends Component {
     const { sendAuthenticationData } = this.props;
     const validationResult = validateSignIn(formState);
 
-    const updateForm = (value, key, obj) => ({
-      ...obj[key],
-      validation: validationResult[key],
-    });
-
     this.setState(prevState => ({
       ...prevState,
-      formState: R.mapObjIndexed(updateForm, formState),
-    }), () => R.all(val => val === 1)(R.values(validationResult))
-      && sendAuthenticationData(R.map(formValue => formValue.value, formState)));
+      formState: updateForm(validationResult, formState),
+    }), () => sendForm(sendAuthenticationData, formState)(R.values(validationResult)));
   }
 
   render() {
     const { isOpen, formState } = this.state;
-    const { signIn: { isInProgress, message } } = this.props;
+    const {
+      signIn: { isInProgress, message },
+    } = this.props;
 
     return (
       <div className="mr-3">
@@ -85,11 +74,11 @@ export class SignIn extends Component {
           onClose={this.toggle}
           open={isOpen}
         >
-          <DialogContent className="p-0 sign-in-content">
+          <DialogContent className="w-100 p-0 sign-in-content">
             <form className="d-flex h-100 flex-column modal-form sign-in-form">
-              {fields.map((
-                { className, id, label, placeholder, margin, type, autocomplete }
-              ) => (
+              {fields.map(({
+                className, id, label, placeholder, margin, type, autocomplete,
+              }) => (
                 <CssTextField
                   id={id}
                   key={id}

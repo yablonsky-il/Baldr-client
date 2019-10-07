@@ -1,0 +1,38 @@
+// Colors
+$gray:                            #a59090;
+$black:                           black;
+
+// Spaces
+$spacer:                            1rem;
+$spacers: (
+  '0': 0,
+  '0_25': ($spacer * .125),
+  '0_5': ($spacer * .25),
+  '1': ($spacer * .5),
+  '1_5': ($spacer * .75),
+  '2': $spacer,
+  '2_5': ($spacer * 1.25),
+  '3': ($spacer * 1.5),
+  '3_5': ($spacer * 1.75),
+  '4': ($spacer * 2),
+  '4_5': ($spacer * 2.25),
+  '5': ($spacer * 2.5),
+  '6': ($spacer * 3),
+  '6_5': ($spacer * 3.25),
+  '7': ($spacer * 3.5),
+  '8': ($spacer * 4),
+  '8_5': ($spacer * 4.25),
+  '13': ($spacer * 6.25),
+);
+
+// Fonts
+$font-family-base:                  $font-family-libre;
+
+$font-weight-light:                 300;
+$font-weight-normal:                400;
+$font-weight-bold:                  700;
+$font-weight-bolder:                900;
+
+// Typography
+$font-size-base:                    1rem;
+$font-size-sm:                      $font-size-base * .875;

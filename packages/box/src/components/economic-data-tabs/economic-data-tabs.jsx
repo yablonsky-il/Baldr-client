@@ -20,7 +20,7 @@ const routes = [
 ];
 
 export const EconomicDataTabsUI = ({ location: { pathname } }) => {
-  const [value, setValue] = React.useState(0);
+  const [, setValue] = React.useState(0);
   const handleChange = (e, newValue) => setValue(newValue);
   const tabIdx = R.findIndex(R.propEq('href', pathname), routes);
 

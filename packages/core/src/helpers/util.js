@@ -2,7 +2,8 @@ import * as R from 'ramda';
 
 const str = 'qaz1wsx2edc3rf4vt5gby6hn7uj8mi9k,ol0.p;[]';
 
-const randomNumber = () => Math.floor(Math.random() * (str.length - 5) + 3);
+export const randomNumber = () => Math.floor(Math.random() * (str.length - 5) + 3);
+export const isEmptyOrNil = R.anyPass([R.isNil, R.isEmpty]);
 
 export const randomizer = () => {
   const randomValue = randomNumber();
@@ -27,5 +28,3 @@ export const getDate = (momentDate) => {
 
   return { day, month, year };
 };
-
-export const isEmptyOrNil = R.anyPass([R.isNil, R.isEmpty]);

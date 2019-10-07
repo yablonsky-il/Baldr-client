@@ -12,6 +12,7 @@ const getInitialState = () => ({
   economicData: {
     date: null,
     data: null,
+    indicator: null,
   },
 });
 
@@ -20,11 +21,11 @@ export const macroEconomicData = handleActions({
     ...state,
     isInProgress: true,
   }),
-  [setEconomicData]: (state, { payload: { date, data } }) => ({
+  [setEconomicData]: (state, { payload: { date, data, indicator } }) => ({
     ...state,
     isInProgress: false,
     isFetched: true,
-    economicData: { date, data },
+    economicData: { date, data, indicator },
   }),
   [clearEconomicData]: getInitialState,
 }, getInitialState());

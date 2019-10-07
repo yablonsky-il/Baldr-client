@@ -5,14 +5,14 @@ import { switchMap, catchError } from 'rxjs/operators';
 import { cookieAuth } from '../../actions/cookie-auth';
 import { setAuthenticationStatus } from '../../actions/sign-in';
 import { setUserProfile } from '../../actions/profile';
-import { SIGN_IN_STATUSES } from '../../constants';
+import { SIGN_IN_STATUSES, API_URL } from '../../constants';
 
 export const cookieAuthEpic = (action$, state$, { ajax }) =>
   action$.pipe(
     ofType(cookieAuth),
     switchMap(() =>
       ajax({
-        url: '/api/cookie-auth',
+        url: `${API_URL}/cookie-auth`,
         method: 'POST',
       }).pipe(
         switchMap(({ response: { status, profile } }) =>
@@ -23,6 +23,7 @@ export const cookieAuthEpic = (action$, state$, { ajax }) =>
     catchError((err) => {
       console.log(err, 'cookieAuth error');
 
+      // return of(setAuthenticationStatus({ status: 1 }));
       return of(null);
     })
   );

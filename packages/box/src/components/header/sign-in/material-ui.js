@@ -16,7 +16,7 @@ export const CssTextField = withStyles({
 
 export const fields = [
   {
-    className: 'sign-in-form-input',
+    className: 'w-100 sign-in-form-input',
     id: FORM.EMAIL,
     label: 'Email',
     placeholder: 'Your email',
@@ -25,7 +25,7 @@ export const fields = [
     autocomplete: 'username',
   },
   {
-    className: 'sign-in-form-input',
+    className: 'w-100 sign-in-form-input',
     id: FORM.PASSWORD,
     label: 'Password',
     placeholder: 'Your password',

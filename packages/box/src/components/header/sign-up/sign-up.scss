@@ -1,18 +1,20 @@
-.sign-up-content {
-  width: 580px;
-  background-color: #f5f7f7;
-  border-radius: 5px;
+.modal-sign-up {
+  .MuiPaper-root {
+    width: 100%;
 
-  .sign-up-form {
-    padding: 30px;
+    .sign-up-content {
+      width: 560px;
+      background-color: #f5f7f7;
+      border-radius: 5px;
 
-    .sign-up-form-input {
-      width: 500px;
-    }
+      .sign-up-form {
+        padding: 30px;
 
-    .sign-up-form-info {
-      min-width: 15px;
-      height: 15px;
+        .sign-up-form-info {
+          min-width: 15px;
+          height: 15px;
+        }
+      }
     }
   }
 }

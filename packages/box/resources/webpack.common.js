@@ -10,11 +10,13 @@ const BABEL_INCLUDE = [
 
 module.exports = {
   target: 'web',
-  entry: path.join(path.resolve(), 'src/index.jsx'),
+  entry: [
+    path.join(path.resolve(), 'src/index.jsx'),
+    path.join(path.resolve(), 'src/customizations/entrypoints.scss'),
+  ],
   output: {
     path: path.resolve('dist'),
-    filename: 'client.bundle.js',
-    publicPath: '/',
+    filename: 'bundle.js',
   },
   module: {
     rules: [
@@ -32,23 +34,21 @@ module.exports = {
           {
             loader: 'sass-resources-loader',
             options: {
-              resources: path.join(path.resolve(), 'src/customizations/entrypoints.scss'),
+              resources: path.join(path.resolve(), 'src/customizations/resources.scss'),
             },
           },
         ],
       },
-    ]
+    ],
   },
-  // resolve: {
-  //   extensions: ['*', '.js', '.jsx']
-  // },
   resolve: {
     modules: [path.resolve('src'), 'node_modules'],
     extensions: ['*', '.js', '.jsx', '.scss'],
     symlinks: false,
     alias: {
-      react: path.resolve('node_modules/@baldr/core/node_modules/react')
-    }
+      react: path.resolve('node_modules/@baldr/core/node_modules/react'),
+      'react-router-dom': path.resolve('node_modules/@baldr/core/node_modules/react-router-dom'),
+    },
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -56,7 +56,8 @@ module.exports = {
       template: path.join(path.resolve(), 'src/index.html'),
     }),
     new MiniCssExtractPlugin({
-      filename: 'styles/[name].css',
+      filename: 'styles/styles.css',
+      publicPath: './',
     }),
     new CleanWebpackPlugin(),
   ],

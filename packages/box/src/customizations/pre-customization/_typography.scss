@@ -1,0 +1,63 @@
+// Font mixins
+@mixin h1() {
+  font-size: $h1-font-size;
+  line-height: $h1-line-height;
+}
+
+@mixin h2() {
+  font-size: $h2-font-size;
+  line-height: $h2-line-height;
+}
+
+@mixin h3() {
+  font-size: $h3-font-size;
+  line-height: $h3-line-height;
+}
+
+@mixin h4() {
+  font-size: $h4-font-size;
+  line-height: $h4-line-height;
+}
+
+@mixin h5() {
+  font-weight: $font-weight-medium;
+  font-size: $h5-font-size;
+  line-height: $h5-line-height;
+  letter-spacing: 0.01px;
+}
+
+@mixin h6() {
+  font-weight: $font-weight-medium;
+  font-size: $h6-font-size;
+  letter-spacing: 0.01px;
+  line-height: $h6-line-height;
+}
+
+@mixin text-large() {
+  font-size: $font-size-base * 1.25; // 20px
+}
+
+@mixin text-base() {
+  font-size: $font-size-base;
+  line-height: 1.5;
+  letter-spacing: 0.01px;
+}
+
+@mixin text-small() {
+  font-size: $font-size-base * 0.875; // 14px
+  letter-spacing: 0.01px;
+  line-height: $line-height-sm;
+}
+
+@mixin label() {
+  letter-spacing: 0.04px;
+  line-height: 1.33;
+  font-weight: $font-weight-medium;
+  font-size: $font-size-xs;
+}
+
+@mixin caption() {
+  letter-spacing: 0.02px;
+  line-height: 1.33;
+  font-size: $font-size-xs;
+}

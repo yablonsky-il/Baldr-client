@@ -4,7 +4,7 @@ import TextField from '@material-ui/core/TextField';
 
 import { socket } from 'core/ws/ws';
 
-export const Test = () => {
+export const Home = () => {
   const [state, setState] = useState({ message: '', count: 0 });
   const { count, message } = state;
 
@@ -36,5 +36,5 @@ export const Test = () => {
         </form>
       </div>
     </div>
-  )
-}
+  );
+};

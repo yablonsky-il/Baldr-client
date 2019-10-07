@@ -1,4 +1,4 @@
-import React, { Component, memo } from 'react';
+import React, { Component } from 'react';
 import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
 import Tooltip from '@material-ui/core/Tooltip';
@@ -6,7 +6,7 @@ import Button from '@material-ui/core/Button';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import * as R from 'ramda';
 
-import { validateSignUp } from 'core/helpers/sign-up';
+import { validateSignUp, updateForm, sendForm } from 'core/helpers/forms';
 import { FORM } from 'core/constants';
 
 import { IconMoreInfo } from '../../icons/icons-header/icon-more-info';
@@ -34,15 +34,8 @@ export class SignUp extends Component {
         value: '',
         validation: 1,
       },
-    }
+    },
   };
-
-  shouldComponentUpdate(nextProps) {
-    console.log(this.props, 'prevProps from SignUp');
-    console.log(nextProps, 'nextProps from SignUp');
-
-    return true;
-  }
 
   toggle = () => this.setState(prevState => ({
     ...prevState,
@@ -69,21 +62,17 @@ export class SignUp extends Component {
     const { sendRegistrationData } = this.props;
     const validationResult = validateSignUp(formState);
 
-    const updateForm = (value, key, obj) => ({
-      ...obj[key],
-      validation: validationResult[key],
-    });
-
     this.setState(prevState => ({
       ...prevState,
-      formState: R.mapObjIndexed(updateForm, formState),
-    }), () => R.all(val => val === 1)(R.values(validationResult))
-    && sendRegistrationData(R.map(formValue => formValue.value, formState)));
+      formState: updateForm(validationResult, formState),
+    }), () => sendForm(sendRegistrationData, formState)(R.values(validationResult)));
   }
 
   render() {
     const { isOpen, formState } = this.state;
-    const { signUp: { isInProgress, message } } = this.props;
+    const {
+      signUp: { isInProgress, message },
+    } = this.props;
 
     return (
       <div className="mr-4">
@@ -95,9 +84,13 @@ export class SignUp extends Component {
           onClose={this.toggle}
           open={isOpen}
         >
-          <DialogContent className="p-0 sign-up-content">
+          <DialogContent className="w-100 p-0 sign-up-content">
             <form className="d-flex flex-column modal-form sign-up-form">
-              {fields.map(({ className, id, label, placeholder, margin, type, title }) => {
+              {fields.map(({
+                className, id, label, placeholder, margin, type, title,
+              }) => {
+                const isValid = formState[id].validation === 0;
+
                 return (
                   <div key={id} className="d-flex align-items-end">
                     <CssTextField
@@ -106,8 +99,8 @@ export class SignUp extends Component {
                       margin={margin}
                       className={className}
                       placeholder={placeholder}
-                      label={formState[id].validation === 0 ? 'Error' : label}
-                      error={formState[id].validation === 0 ? Boolean(1) : false}
+                      label={isValid ? 'Error' : label}
+                      error={isValid ? Boolean(1) : false}
                       onChange={this.handleChange}
                     />
                     <Tooltip title={title} placement="top">
@@ -131,6 +124,6 @@ export class SignUp extends Component {
           </DialogContent>
         </Dialog>
       </div>
-    )
+    );
   }
 }

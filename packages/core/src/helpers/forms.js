@@ -1,4 +1,5 @@
-/* eslint-disable no-useless-escape */
+import * as R from 'ramda';
+
 import { FORM } from '../constants';
 
 const validateFormNameAndSurname = str => str.length > 1 ? 1 : 0;
@@ -29,3 +30,15 @@ export const validateSignIn = ({
   [FORM.EMAIL]: checkValue(email, validateFormEmail),
   [FORM.PASSWORD]: password.length > 3 ? 1 : 0,
 });
+
+export const updateForm = (validationResult, formState) =>
+  R.mapObjIndexed((value, key, obj) => ({
+    ...obj[key],
+    validation: validationResult[key],
+  }), formState);
+
+export const sendForm = (authenticateAction, formState) => R.ifElse(
+  resultValidate => R.all(val => val === 1)(resultValidate),
+  () => authenticateAction(R.map(formValue => formValue.value, formState)),
+  () => null,
+);
