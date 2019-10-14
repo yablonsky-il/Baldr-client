@@ -4,12 +4,12 @@ import { switchMap, catchError } from 'rxjs/operators';
 
 import { signOut } from '../../actions/sign-out';
 import { clearUserProfile } from '../../actions/profile';
-import { API_URL } from '../../constants';
+import { API_PATH } from '../../constants';
 
 export const signOutEpic = (action$, state$, { ajax }) => action$.pipe(
   ofType(signOut),
   switchMap(() => ajax({
-    url: `${API_URL}/sign-out`,
+    url: `${API_PATH}/sign-out`,
     method: 'POST',
   }).pipe(switchMap(() => of(clearUserProfile())))),
   catchError((err) => {

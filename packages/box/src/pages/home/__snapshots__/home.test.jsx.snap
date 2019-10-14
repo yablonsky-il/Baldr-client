@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<HomeUI /> should match snapshot 1`] = `
+<div>
+  <div
+    style={
+      Object {
+        "width": "250px",
+      }
+    }
+  >
+    <form
+      className="d-flex flex-column"
+    >
+      <WithStyles(ForwardRef(TextField))
+        onChange={[Function]}
+      />
+      <WithStyles(ForwardRef(Button))
+        className="mt-2"
+        onClick={[Function]}
+        variant="contained"
+      >
+        Send
+      </WithStyles(ForwardRef(Button))>
+    </form>
+  </div>
+</div>
+`;

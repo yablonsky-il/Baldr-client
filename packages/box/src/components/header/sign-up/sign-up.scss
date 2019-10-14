@@ -1,19 +1,16 @@
 .modal-sign-up {
-  .MuiPaper-root {
-    width: 100%;
+  .sign-up-content {
+    background-color: $white-smoke;
+    width: 80%;
 
-    .sign-up-content {
-      width: 560px;
-      background-color: #f5f7f7;
-      border-radius: 5px;
+    @include media-breakpoint-up(sm) {
+      width: 50%;
+    }
 
-      .sign-up-form {
-        padding: 30px;
-
-        .sign-up-form-info {
-          min-width: 15px;
-          height: 15px;
-        }
+    .sign-up-form {
+      .sign-up-form-info {
+        min-width: 15px;
+        height: 15px;
       }
     }
   }

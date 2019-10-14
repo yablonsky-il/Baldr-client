@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<HomeUI /> should match snapshot 1`] = `
+<WithStyles(ForwardRef(Container))
+  className="p-0"
+  maxWidth="xl"
+>
+  <div>
+    <withRouter(EconomicDataTabsUI)
+      isInProgress={false}
+    />
+    <DatePicker
+      autoOk={true}
+      className="mt-4"
+      inputVariant="outlined"
+      label="With keyboard"
+      onChange={null}
+      value={null}
+    />
+  </div>
+  <EconomicDataTable
+    economicData={
+      Object {
+        "data": null,
+        "date": null,
+      }
+    }
+    pathname="en/home"
+  />
+</WithStyles(ForwardRef(Container))>
+`;

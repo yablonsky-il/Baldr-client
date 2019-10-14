@@ -86,6 +86,7 @@ export class MacroEconomicUI extends PureComponent {
     const { selectedDate } = this.state;
     const {
       children,
+      isInProgress,
       location: { pathname },
       economicData,
     } = this.props;
@@ -93,6 +94,7 @@ export class MacroEconomicUI extends PureComponent {
     return children({
       pathname,
       selectedDate,
+      isInProgress,
       economicData,
       setDate: this.setDate,
     });
@@ -100,8 +102,12 @@ export class MacroEconomicUI extends PureComponent {
 }
 
 const mapStateToProps = ({
-  macroEconomicData: { economicData },
+  macroEconomic: {
+    isInProgress,
+    economicData,
+  },
 }) => ({
+  isInProgress,
   economicData,
 });
 

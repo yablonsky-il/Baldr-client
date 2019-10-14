@@ -6,24 +6,39 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 
+import { withCore } from 'core/hocs/with-core-component';
+import { Header as HeaderCore } from 'core/components/header/header';
+
 import { IconMenu } from '../icons/icons-drawer/icon-menu';
 import { IconStatistic } from '../icons/icons-drawer/icon-statistic';
 import { IconHome } from '../icons/icons-drawer/icon-home';
-import { IconWebChat } from '../icons/icons-drawer/icon-web-chat';
+import { IconWebMessenger } from '../icons/icons-drawer/icon-web-messenger';
+import { SignIn } from '../header/sign-in/sign-in';
+import { SignUp } from '../header/sign-up/sign-up';
+import { Profile } from '../header/profile/profile';
 
 import './drawer.scss';
 
 const listItems = [
   { item: 'Home', icon: <IconHome className="fill-gray" />, href: '/' },
-  { item: 'MEconomic Statistic', icon: <IconStatistic className="fill-gray" />, href: '/macro-economic/stocks' },
-  { item: 'WebChat', icon: <IconWebChat className="fill-gray" />, href: '/web-chat' },
+  { item: 'MEconomic statistic', icon: <IconStatistic className="fill-gray" />, href: '/macro-economic/stocks' },
+  { item: 'Web Messenger', icon: <IconWebMessenger className="fill-gray" />, href: '/web-messenger' },
 ];
 
-export const DrawerUI = () => {
+export const DrawerUI = ({
+  signUp,
+  signIn,
+  userProfile,
+  sendRegistrationData,
+  sendAuthenticationData,
+  signOut,
+}) => {
   const [isOpen, setState] = React.useState(false);
 
   const toggleDrawer = open => (event) => {
-    if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+    const closest = event.target.closest('.profile-drawer');
+
+    if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift') || closest) {
       return;
     }
 
@@ -37,6 +52,26 @@ export const DrawerUI = () => {
       onClick={toggleDrawer(false)}
       onKeyDown={toggleDrawer(false)}
     >
+      {!userProfile.isAuthorized
+        ? (
+          <div className="d-flex d-md-none justify-content-around mt-1">
+            <SignIn
+              signIn={signIn}
+              sendAuthenticationData={sendAuthenticationData}
+            />
+            <SignUp
+              signUp={signUp}
+              sendRegistrationData={sendRegistrationData}
+            />
+          </div>
+        ) : (
+          <Profile
+            className="d-flex justify-content-end align-items-center profile-drawer"
+            avatarClassName="mr-1"
+            userProfile={userProfile}
+            signOut={signOut}
+          />
+        )}
       <List>
         {listItems.map(({ item, icon, href }) => (
           <NavLink key={item} to={href}>
@@ -70,4 +105,4 @@ export const DrawerUI = () => {
   );
 };
 
-export const DrawerMenu = memo(DrawerUI);
+export const DrawerMenu = memo(withCore(HeaderCore, DrawerUI));

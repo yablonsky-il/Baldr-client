@@ -1,29 +1,32 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+// const CopyWebpackPlugin = require('copy-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const autoprefixer = require('autoprefixer');
 
-const BABEL_INCLUDE = [
-  path.resolve('node_modules/@baldr/core/src'),
-  path.resolve('src'),
-];
+const CURRENT_DIRECTORY = path.resolve();
 
 module.exports = {
   target: 'web',
   entry: [
-    path.join(path.resolve(), 'src/index.jsx'),
-    path.join(path.resolve(), 'src/customizations/entrypoints.scss'),
+    path.join(CURRENT_DIRECTORY, 'src/index.jsx'),
+    path.join(CURRENT_DIRECTORY, 'src/customizations/entrypoints.scss'),
   ],
   output: {
     path: path.resolve('dist'),
     filename: 'bundle.js',
+    chunkFilename: '[name].bundle.js',
   },
   module: {
     rules: [
       {
         test: /\.(js|jsx)$/,
         use: ['babel-loader'],
-        include: BABEL_INCLUDE,
+        include: [
+          path.resolve('node_modules/@baldr/core/src'),
+          path.resolve('src'),
+        ],
       },
       {
         test: /\.s?css$/,
@@ -34,7 +37,18 @@ module.exports = {
           {
             loader: 'sass-resources-loader',
             options: {
-              resources: path.join(path.resolve(), 'src/customizations/resources.scss'),
+              resources: path.join(CURRENT_DIRECTORY, 'src/customizations/resources.scss'),
+            },
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              ident: 'postcss',
+              plugins: [
+                autoprefixer({
+                  grid: true,
+                }),
+              ],
             },
           },
         ],
@@ -47,14 +61,16 @@ module.exports = {
     symlinks: false,
     alias: {
       react: path.resolve('node_modules/@baldr/core/node_modules/react'),
+      'react-dom': path.resolve('node_modules/@baldr/core/node_modules/react-dom'),
       'react-router-dom': path.resolve('node_modules/@baldr/core/node_modules/react-router-dom'),
     },
   },
   plugins: [
     new HtmlWebpackPlugin({
       filename: 'index.html',
-      template: path.join(path.resolve(), 'src/index.html'),
+      template: path.join(CURRENT_DIRECTORY, 'public/index.html'),
     }),
+    // new CopyWebpackPlugin([{ from: path.resolve('public'), to: 'public/' }]),
     new MiniCssExtractPlugin({
       filename: 'styles/styles.css',
       publicPath: './',

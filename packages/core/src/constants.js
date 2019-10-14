@@ -5,9 +5,10 @@ export const ENV = {
   PRODUCITON: 'production',
 };
 
-export const API_URL = NODE_ENV === ENV.DEVELOPMENT ? '/proxy/api' : '/api';
-export const LOCAL_SOCKET_URL = 'http://localhost:3005';
-export const REMOTE_SOCKET_URL = '';
+const isDevelopmentEnv = NODE_ENV === ENV.DEVELOPMENT;
+
+export const API_PATH = isDevelopmentEnv ? '/proxy/api' : '/api';
+export const SOCKET_URL = isDevelopmentEnv ? 'http://localhost:3005' : 'https://heimdall-server.herokuapp.com';
 
 export const FORM = {
   NAME: 'sign-up-form-name',
@@ -25,3 +26,9 @@ export const SIGN_IN_STATUSES = {
   ERROR: 0,
   SUCCESS: 1,
 };
+
+export const MODALS_ID = {
+  SIGN_IN_MODAL: 'sign-in-modal',
+  SIGN_UP_MODAL: 'sign-up-modal',
+};
+

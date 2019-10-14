@@ -1,10 +1,9 @@
 @import url('https://fonts.googleapis.com/css?family=Libre+Baskerville&display=swap');
 
 @import '~bootstrap/scss/_functions';
-
 @import 'pre-customization';
 
-// Load bootstrap.
+/* Load bootstrap. */
 @import '~bootstrap/scss/_variables';
 @import '~bootstrap/scss/_mixins';
 @import '~bootstrap/scss/_root';
@@ -37,5 +36,5 @@
 @import '~bootstrap/scss/_utilities';
 @import '~bootstrap/scss/_spinners';
 
-// Post bootstrap overrides & additions
+/* Post bootstrap overrides & additions */
 @import 'app-styles';

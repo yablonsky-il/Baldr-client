@@ -4,23 +4,12 @@ import TextField from '@material-ui/core/TextField';
 
 import { socket } from 'core/ws/ws';
 
-export const Home = () => {
-  const [state, setState] = useState({ message: '', count: 0 });
-  const { count, message } = state;
+const Home = () => {
+  const [state, setState] = useState({ message: '' });
+  const { message } = state;
 
   return (
     <div>
-      <div>
-        <p>
-          {count < 6 ? `Кол-во кликов: ${count}` : 'Have a nice day!'}
-        </p>
-        <Button
-          variant="contained"
-          onClick={() => setState({ ...state, count: count + 1 })}
-        >
-          Click
-        </Button>
-      </div>
       <div style={{ width: '250px' }}>
         <form className="d-flex flex-column">
           <TextField
@@ -38,3 +27,5 @@ export const Home = () => {
     </div>
   );
 };
+
+export default Home;

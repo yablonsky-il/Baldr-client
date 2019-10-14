@@ -21,12 +21,13 @@ const HeaderUI = ({
   <header className="w-100 d-flex align-items-center justify-content-between header">
     <div className="d-flex align-items-center">
       <DrawerMenu />
-      <a href="/" className="h2 m-0 ml-3 header-title">#</a>
+      <a href="/" className="h2 m-0 ml-3 header-title">Pet Project</a>
     </div>
     {!userProfile.isAuthorized
       ? (
-        <div className="d-flex">
+        <div className="d-none d-md-flex">
           <SignIn
+            className="mr-1 mr-sm-3"
             signIn={signIn}
             sendAuthenticationData={sendAuthenticationData}
           />
@@ -37,6 +38,8 @@ const HeaderUI = ({
         </div>
       ) : (
         <Profile
+          className="d-flex align-items-center profile"
+          avatarClassName="mr-4"
           userProfile={userProfile}
           signOut={signOut}
         />

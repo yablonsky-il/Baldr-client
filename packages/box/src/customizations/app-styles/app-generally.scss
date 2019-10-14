@@ -9,6 +9,7 @@ a {
 
   &:hover {
     text-decoration: none;
+    color: $black;
   }
 }
 
@@ -22,4 +23,8 @@ ul {
 
 .cursor-pointer {
   cursor: pointer;
+}
+
+.rounded {
+  border-radius: .5rem;
 }

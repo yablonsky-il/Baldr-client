@@ -1,0 +1,9 @@
+.economic-data-table {
+  .pagination-actions {
+    button {
+      @include media-breakpoint-down(sm) {
+        padding: 0;
+      }
+    }
+  }
+}

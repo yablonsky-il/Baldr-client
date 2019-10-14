@@ -1,3 +1,19 @@
+# System folder for VSCode local history plugin
+.history
+.vscode
+
+# System folder for caches, etc.
+.etmp
+.cache
+
 node_modules
+dist
 .DS_Store
+.idea
+.env
+
+# Reports
+npm-debug.log
 yarn-error.log
+package-lock.json
+lerna-debug.log
