@@ -4,14 +4,14 @@ import { switchMap, catchError } from 'rxjs/operators';
 
 import { sendRegistrationData, setRegistrationStatus } from '../../actions/sign-up';
 import { setUserProfile } from '../../actions/profile';
-import { SIGN_UP_STATUSES, API_URL } from '../../constants';
+import { SIGN_UP_STATUSES, API_PATH } from '../../constants';
 
 export const signUpEpic = (action$, state$, { ajax }) =>
   action$.pipe(
     ofType(sendRegistrationData),
     switchMap(({ payload: formData }) =>
       ajax({
-        url: `${API_URL}/sign-up`,
+        url: `${API_PATH}/sign-up`,
         method: 'POST',
         body: formData,
       }).pipe(

@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<WebChatUI /> should match snapshot 1`] = `
+<div>
+  Section in development
+</div>
+`;

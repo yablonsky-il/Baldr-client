@@ -5,6 +5,7 @@ import * as R from 'ramda';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
+import LinearProgress from '@material-ui/core/LinearProgress';
 
 const routes = [
   { id: 1, label: 'stocks', href: '/macro-economic/stocks' },
@@ -19,13 +20,17 @@ const routes = [
   { id: 10, label: 'personal-income-tax-rate', href: '/macro-economic/personal-income-tax-rate' },
 ];
 
-export const EconomicDataTabsUI = ({ location: { pathname } }) => {
+export const EconomicDataTabsUI = ({
+  isInProgress,
+  location: { pathname },
+}) => {
   const [, setValue] = React.useState(0);
   const handleChange = (e, newValue) => setValue(newValue);
   const tabIdx = R.findIndex(R.propEq('href', pathname), routes);
 
   return (
-    <AppBar position="static" color="default" className="mt-3 economic-values-tabs">
+    <AppBar position="relative" color="default" className="mt-3 economic-values-tabs">
+      {isInProgress && <LinearProgress className="w-100 position-absolute" />}
       <Tabs
         value={tabIdx}
         onChange={handleChange}

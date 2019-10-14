@@ -1,15 +1,13 @@
 .modal-sign-in {
-  .MuiPaper-root {
-    width: 100%;
+  .sign-in-content {
+    width: 80%;
 
-    .sign-in-content {
-      width: 560px;
-      background-color: #f5f7f7;
-      border-radius: 5px;
+    @include media-breakpoint-up(sm) {
+      width: 50%;
+    }
 
-      .sign-in-form {
-        padding: 30px;
-      }
+    .sign-in-form {
+      background-color: $white-smoke;
     }
   }
 }

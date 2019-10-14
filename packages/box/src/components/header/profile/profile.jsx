@@ -6,6 +6,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import './profile.scss';
 
 const ProfileUI = ({
+  className,
   userProfile: {
     name,
     surname,
@@ -20,12 +21,12 @@ const ProfileUI = ({
   const handleClose = () => setAnchorEl(null);
 
   return (
-    <div className="d-flex align-items-center profile">
+    <div className={className}>
       <div className="font-weight-bold mr-2 profile-user">{name}</div>
       <div className="font-weight-bold mr-2 profile-user">{surname}</div>
       <div>
         <div
-          className="position-relative mr-4 profile-button "
+          className="position-relative mr-4 profile-button"
           role="button"
           onClick={handleClick}
           tabIndex={0}

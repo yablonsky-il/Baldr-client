@@ -9,19 +9,19 @@ import { signOut as signOutAction } from '../../actions/sign-out';
 const HeaderUI = ({
   signUp,
   signIn,
+  signOut,
   userProfile,
   sendRegistrationData,
   sendAuthenticationData,
-  signOut,
   children,
 }) => children({
   signUp,
   signIn,
+  signOut,
   userProfile,
   sendRegistrationData,
   sendAuthenticationData,
-  signOut,
-})
+});
 
 const mapStateToProps = ({ signUp, signIn, userProfile }) => ({
   signUp,
@@ -38,9 +38,5 @@ const mapDispatchToProps = {
 export const Header = memo(connect(
   mapStateToProps,
   mapDispatchToProps,
-)(HeaderUI), (prevProps, nextProps) => {
-  console.log(prevProps, 'prevProps from Header');
-  console.log(nextProps, 'nextProps from Header');
-
-  return !R.equals(prevProps.userProfile, nextProps.userProfile);
-});
+)(HeaderUI), (prevProps, nextProps) =>
+  !R.equals(prevProps.userProfile, nextProps.userProfile));

@@ -5,11 +5,12 @@ import PropTypes from 'prop-types';
 import { withCore } from 'core/hocs/with-core-component';
 import { MacroEconomic as MacroEcomoicCore } from 'core/pages/macro-economic';
 
-import { EconomicDataTabs } from '../components/economic-data-tabs/economic-data-tabs';
-import { EconomicDataTable } from '../components/economic-data-table/economic-data-table';
-import { DatePicker } from '../components/date-picker/date-picker';
+import { EconomicDataTabs } from '../../components/economic-data-tabs/economic-data-tabs';
+import { EconomicDataTable } from '../../components/economic-data-table/economic-data-table';
+import { DatePicker } from '../../components/date-picker/date-picker';
 
 export const MacroEconomicUI = ({
+  isInProgress,
   economicData,
   selectedDate,
   pathname,
@@ -17,7 +18,7 @@ export const MacroEconomicUI = ({
 }) => (
   <Container maxWidth="xl" className="p-0">
     <div>
-      <EconomicDataTabs />
+      <EconomicDataTabs isInProgress={isInProgress} />
       <DatePicker
         autoOk
         className="mt-4"
@@ -35,10 +36,13 @@ export const MacroEconomicUI = ({
 );
 
 MacroEconomicUI.propTypes = {
+  isInProgress: PropTypes.bool.isRequired,
   economicData: PropTypes.shape({}).isRequired,
   selectedDate: PropTypes.shape({}).isRequired,
   pathname: PropTypes.string.isRequired,
   setDate: PropTypes.func.isRequired,
 };
 
-export const MacroEconomic = withCore(MacroEcomoicCore, MacroEconomicUI);
+const MacroEconomic = withCore(MacroEcomoicCore, MacroEconomicUI);
+
+export default MacroEconomic;

@@ -6,7 +6,8 @@
   ],
   "plugins": [
     "ramda",
-    "jest"
+    "jest",
+    "react-hooks"
   ],
   "globals": {
     "document": true,
@@ -27,6 +28,10 @@
     "no-multiple-empty-lines": ["error", { "max": 1 }],
     "prefer-destructuring": ["error", { "object": true, "array": false }],
     "react/destructuring-assignment": 0,
+    "react/state-in-constructor": 0,
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
+    "react/static-property-placement": 0,
     "no-underscore-dangle": 0,
     "lines-between-class-members": 0,
     "implicit-arrow-linebreak": 0,

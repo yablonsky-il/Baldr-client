@@ -24,24 +24,24 @@ const indicatorsKeys = {
   'personal-income-tax-rate': 'personalIncomeTaxRate',
 };
 
-const serializeData = (data, indicator) => {
-  if (isEmptyOrNil(data)) {
+const serializeData = (economicData, indicator) => {
+  if (isEmptyOrNil(economicData)) {
     return { date: null, data: null };
   }
 
-  const economicData = R.ifElse(
-    interData => Array.isArray(interData),
-    interData => interData,
-    interData => R.compose(
-      items => items.map((item, idx) => ({ ...item, id: R.inc(idx) })),
+  const serializedData = R.ifElse(
+    economicValues => Array.isArray(economicValues),
+    economicValues => economicValues.map((economicValue, idx) => ({ ...economicValue, id: R.inc(idx) })),
+    economicValues => R.compose(
+      economicValues => economicValues.map((economicValue, idx) => ({ ...economicValue, id: R.inc(idx) })),
       R.flatten,
       R.values,
-    )(interData),
-  )(data[indicatorsKeys[indicator]]);
+    )(economicValues),
+  )(economicData[indicatorsKeys[indicator]]);
 
   return {
-    date: data.date,
-    data: economicData,
+    date: economicData.date,
+    data: serializedData,
     indicator,
   };
 };

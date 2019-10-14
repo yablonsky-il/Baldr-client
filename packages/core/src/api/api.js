@@ -1,4 +1,4 @@
-import { API_URL } from '../constants';
+import { API_PATH } from '../constants';
 
 /** Economic indicators:
  * stocks
@@ -23,4 +23,4 @@ import { API_URL } from '../constants';
  * @property {object} - date
  * @property {object} - indicator
 */
-export const getEconomicDataByDate = (indicator, { day, month, year }) => `${API_URL}/${indicator}/date/${day}-${month}-${year}`;
+export const getEconomicDataByDate = (indicator, { day, month, year }) => `${API_PATH}/${indicator}/date/${day}-${month}-${year}`;

@@ -4,23 +4,21 @@ import MomentUtils from '@date-io/moment';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import Container from '@material-ui/core/Container';
 
-import { MacroEconomic } from './pages/macro-economic';
-import { WebChat } from './pages/web-chat';
-import { Home } from './pages/home';
 import { Header } from './components/header/header';
+import { LoadableHome, LoadableMacroEconomic, LoadableWebChat } from './pages/routes';
 
 import './app.scss';
 
 const AppUI = () => (
-  <Container maxWidth="xl" className="px-3">
+  <Container maxWidth="xl" className="vh-100 px-1 px-sm-2 px-md-3">
     <MuiPickersUtilsProvider utils={MomentUtils}>
       <Header />
       <main>
         {/* sidebar */}
         <Switch>
-          <Route exact path="/" component={Home} />
-          <Route path="/macro-economic" component={MacroEconomic} />
-          <Route path="/web-chat" component={WebChat} />
+          <Route exact path="/" component={LoadableHome} />
+          <Route path="/macro-economic" component={LoadableMacroEconomic} />
+          <Route path="/web-chat" component={LoadableWebChat} />
         </Switch>
         {/* <footer /> */}
       </main>
