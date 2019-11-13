@@ -1,8 +1,9 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-// const CopyWebpackPlugin = require('copy-webpack-plugin');
+const LoadablePlugin = require('@loadable/webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+// const CopyWebpackPlugin = require('copy-webpack-plugin');
 const autoprefixer = require('autoprefixer');
 
 const CURRENT_DIRECTORY = path.resolve();
@@ -66,15 +67,16 @@ module.exports = {
     },
   },
   plugins: [
-    new HtmlWebpackPlugin({
-      filename: 'index.html',
-      template: path.join(CURRENT_DIRECTORY, 'public/index.html'),
-    }),
+    new LoadablePlugin(),
+    // new HtmlWebpackPlugin({
+    //   filename: 'index.html',
+    //   template: path.join(CURRENT_DIRECTORY, 'public/index.html'),
+    // }),
     // new CopyWebpackPlugin([{ from: path.resolve('public'), to: 'public/' }]),
     new MiniCssExtractPlugin({
       filename: 'styles/styles.css',
       publicPath: './',
     }),
-    new CleanWebpackPlugin(),
+    // new CleanWebpackPlugin(),
   ],
 };

@@ -6,14 +6,20 @@ import { cookieAuth as cookieAuthAction } from './actions/cookie-auth';
 export const AppCore = ({ cookieAuth, children }) => {
   useEffect(() => { cookieAuth(); }, []);
 
-  return children;
+  // return children;
+  return <div>PUPA</div>;
 };
 
 const mapDispatchToProps = {
   cookieAuth: cookieAuthAction,
 };
 
-export const App = connect(
+// export const App = connect(
+//   null,
+//   mapDispatchToProps,
+// )(AppCore);
+
+export default connect(
   null,
   mapDispatchToProps,
 )(AppCore);
