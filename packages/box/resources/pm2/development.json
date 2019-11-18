@@ -1,0 +1,20 @@
+{
+  "apps" : [
+    {
+      "name": "application",
+      "script": "dist/server.js",
+      "node_args": "-r dotenv/config",
+      "watch": ["dist"]
+    },
+    {
+      "name": "baldr-server-watch",
+      "script": "./node_modules/.bin/webpack",
+      "args": "--config ./resources/webpack/webpack.server-dev.js --watch  -d"
+    },
+    {
+      "name": "baldr-client-watch",
+      "script": "./node_modules/.bin/webpack",
+      "args": "--config ./resources/webpack/webpack.client-dev.js --watch  -d"
+    }
+  ]
+}

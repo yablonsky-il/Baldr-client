@@ -21,7 +21,8 @@ const HeaderUI = ({
   <header className="w-100 d-flex align-items-center justify-content-between header">
     <div className="d-flex align-items-center">
       <DrawerMenu />
-      <a href="/" className="h2 m-0 ml-3 header-title">Pet Project</a>
+      {/* <a href="/" className="h2 m-0 ml-3 header-title">Pet Project</a> */}
+      <a href="/" className="h2 m-0 ml-3 header-title">#</a>
     </div>
     {!userProfile.isAuthorized
       ? (

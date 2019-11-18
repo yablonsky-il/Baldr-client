@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux';
 
+import { system } from './system';
 import { modals } from './modals';
 // import { notifications } from './notifications';
 import { signUp } from './sign-up';
@@ -9,6 +10,7 @@ import { macroEconomic } from './macro-economic';
 import { webMessenger } from './web-messenger';
 
 export const rootReducer = combineReducers({
+  system,
   modals,
   // notifications,
   signUp,

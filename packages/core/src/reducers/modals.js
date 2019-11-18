@@ -2,7 +2,7 @@ import { handleActions } from 'redux-actions';
 import {
   openModal,
   closeModal,
-} from '../actions/system';
+} from '../actions/modals';
 
 export const getInitialState = () => ({});
 

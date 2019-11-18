@@ -1,23 +1,33 @@
-
+import path from 'path';
 import express from 'express';
-import bodyParser from 'body-parser';
-// import cors from 'cors';
+import cors from 'cors';
+import helmet from 'helmet';
+import cookieParser from 'cookie-parser';
+import { XMLHttpRequest } from 'xmlhttprequest';
 
-import { renderHtml } from './render';
+import { renderApp } from './app';
 
-const app = express();
-const port = process.env.PORT || 3005;
+export const initServer = (routes) => {
+  // By default, rxjs ajax observable doesn't contain any XMLHttpRequest polyfills for node
+  global.XMLHttpRequest = XMLHttpRequest;
 
-// app.use(cors());
-app.use(express.static('public'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+  const app = express();
 
-app.get('*', (req, res) => {
-  // console.log(req, 'req');
-  // console.log(res, 'res');
-  console.log(req.url);
-  res.send(renderHtml(req.url));
-});
+  // Assets/public serve
+  app.use('/assets', express.static('./dist'));
+  app.use(cors());
+  app.use(helmet());
+  app.use(cookieParser());
 
-app.listen(port, () => console.log(`Server is listening on port: ${port}`));
+  // favicon.ico
+  app.get('/favicon.ico', (req, res) => {
+    // res.sendFile('favicon.ico', { root: path.join(__dirname, './public/favicon') });
+    console.log(__dirname, 'dirname');
+    res.sendFile('favicon.ico', { root: path.join(__dirname, './public') });
+  });
+
+  app.get('*', renderApp(routes));
+
+  const port = process.env.PORT || 3006;
+  app.listen(port, () => console.log(`Listening on port ${port}`)); // eslint-disable-line no-console
+};

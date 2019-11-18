@@ -6,7 +6,7 @@ import * as R from 'ramda';
 import {
   openModal,
   closeModal,
-} from '../actions/system';
+} from '../actions/modals';
 
 export const withModalActions = (WrappedComponent) => {
   class ModalActions extends Component {

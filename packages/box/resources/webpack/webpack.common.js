@@ -1,33 +1,91 @@
 const path = require('path');
+const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const LoadablePlugin = require('@loadable/webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const nodeExternals = require('webpack-node-externals');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-// const CopyWebpackPlugin = require('copy-webpack-plugin');
-const autoprefixer = require('autoprefixer');
 
 const CURRENT_DIRECTORY = path.resolve();
 
-module.exports = {
+const OUTPUT = {
+  path: path.resolve('dist'),
+  publicPath: '/assets/',
+  sourceMapFilename: '[name].js.map',
+};
+
+const INCLUDES = [
+  path.resolve('src'),
+  path.resolve('node_modules/@baldr/core/src'),
+];
+
+const CORE_PATH = 'node_modules/@baldr/core/node_modules/';
+
+const server = {
+  target: 'node',
+  entry: path.resolve('src/server/index.js'),
+  externals: [nodeExternals()],
+  output: {
+    ...OUTPUT,
+    filename: 'server.js',
+  },
+  module: {
+    rules: [
+      {
+        test: /\.jsx?$/,
+        include: INCLUDES,
+        loader: 'babel-loader',
+        query: {
+          presets: [
+            ['@babel/preset-env', {
+              targets: {
+                node: 8,
+              },
+            }],
+          ],
+        },
+      },
+      {
+        test: /\.(css|scss|jpg|png|svg)$/,
+        loader: 'ignore-loader',
+      },
+    ],
+  },
+  resolve: {
+    extensions: ['*', '.js', '.jsx'],
+    modules: [path.resolve('src'), 'node_modules'],
+    symlinks: false,
+  },
+  node: {
+    __dirname: false,
+    __filename: false,
+  },
+  plugins: [
+    new LoadablePlugin(),
+    new CleanWebpackPlugin(),
+    new webpack.DefinePlugin({
+      __isBrowser__: 'false',
+    }),
+  ],
+};
+
+const client = {
   target: 'web',
   entry: [
-    path.join(CURRENT_DIRECTORY, 'src/index.jsx'),
+    path.join(CURRENT_DIRECTORY, 'src/client/index.jsx'),
     path.join(CURRENT_DIRECTORY, 'src/customizations/entrypoints.scss'),
   ],
   output: {
-    path: path.resolve('dist'),
-    filename: 'bundle.js',
-    chunkFilename: '[name].bundle.js',
+    ...OUTPUT,
+    filename: '[name].js',
+    chunkFilename: '[id].js',
   },
   module: {
     rules: [
       {
         test: /\.(js|jsx)$/,
         use: ['babel-loader'],
-        include: [
-          path.resolve('node_modules/@baldr/core/src'),
-          path.resolve('src'),
-        ],
+        include: INCLUDES,
       },
       {
         test: /\.s?css$/,
@@ -43,14 +101,6 @@ module.exports = {
           },
           {
             loader: 'postcss-loader',
-            options: {
-              ident: 'postcss',
-              plugins: [
-                autoprefixer({
-                  grid: true,
-                }),
-              ],
-            },
           },
         ],
       },
@@ -61,22 +111,24 @@ module.exports = {
     extensions: ['*', '.js', '.jsx', '.scss'],
     symlinks: false,
     alias: {
-      react: path.resolve('node_modules/@baldr/core/node_modules/react'),
-      'react-dom': path.resolve('node_modules/@baldr/core/node_modules/react-dom'),
-      'react-router-dom': path.resolve('node_modules/@baldr/core/node_modules/react-router-dom'),
+      react: path.resolve(path.join(CORE_PATH, 'react')),
+      'react-dom': path.resolve(path.join(CORE_PATH, 'react-dom')),
+      'react-router-dom': path.resolve(path.join(CORE_PATH, 'react-router-dom')),
+      rxjs: path.resolve(path.join(CORE_PATH, 'rxjs')),
+      ramda: path.resolve(path.join(CORE_PATH, 'ramda')),
+      'prop-types': path.resolve(path.join(CORE_PATH, 'prop-types')),
+      '@loadable/component': path.resolve(path.join(CORE_PATH, '@loadable/component')),
+      '@babel/runtime': path.resolve(path.join(CORE_PATH, '@babel/runtime')),
     },
   },
   plugins: [
     new LoadablePlugin(),
-    // new HtmlWebpackPlugin({
-    //   filename: 'index.html',
-    //   template: path.join(CURRENT_DIRECTORY, 'public/index.html'),
-    // }),
-    // new CopyWebpackPlugin([{ from: path.resolve('public'), to: 'public/' }]),
+    new CopyWebpackPlugin([{ from: path.resolve('public'), to: 'public/' }]),
     new MiniCssExtractPlugin({
-      filename: 'styles/styles.css',
-      publicPath: './',
+      filename: '[name].css',
+      chunkFilename: '[id].css',
     }),
-    // new CleanWebpackPlugin(),
   ],
 };
+
+module.exports = { server, client };

@@ -57,9 +57,4 @@ const ProfileUI = ({
   );
 };
 
-export const Profile = memo(ProfileUI, (prevProps, nextProps) => {
-  console.log(prevProps, 'prevProps from Profile');
-  console.log(nextProps, 'nextProps from Profile');
-
-  return true;
-});
+export const Profile = memo(ProfileUI);

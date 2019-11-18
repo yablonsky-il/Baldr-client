@@ -5,10 +5,22 @@ export const ENV = {
   PRODUCITON: 'production',
 };
 
-const isDevelopmentEnv = NODE_ENV === ENV.DEVELOPMENT;
-
-export const API_PATH = isDevelopmentEnv ? '/proxy/api' : '/api';
+export const isDevelopmentEnv = NODE_ENV === ENV.DEVELOPMENT;
+export const API_PATH = isDevelopmentEnv ? 'http://localhost:3005/api' : 'https://heimdall-server.herokuapp.com/api';
 export const SOCKET_URL = isDevelopmentEnv ? 'http://localhost:3005' : 'https://heimdall-server.herokuapp.com';
+
+export const HTTP_CODES = {
+  OK: 200,
+  MOVED_PERMANENTLY: 301,
+  BAD_REQUEST: 400,
+  HTTP_CODE_NOT_FOUND: 404,
+  INTERNAL_SERVER_ERROR: 500,
+};
+
+export const ERRORS = {
+  UNDEFINED: 'UNDEFINED',
+  AUTH_ERROR: 'AUTH_ERROR',
+};
 
 export const FORM = {
   NAME: 'sign-up-form-name',

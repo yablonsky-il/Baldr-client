@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import {
   openModal as openModalAction,
   closeModal as closeModalAction,
-} from '../../actions/system';
+} from '../../actions/modals';
 
 const ModalWindowCore = ({
   children,

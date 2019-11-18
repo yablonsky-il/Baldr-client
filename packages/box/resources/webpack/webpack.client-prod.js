@@ -4,12 +4,13 @@ const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const { DuplicatesPlugin } = require('inspectpack/plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const SpeedMeasurePlugin = require('speed-measure-webpack-plugin');
+const MomentLocalesPlugin = require('moment-locales-webpack-plugin');
 
-const common = require('./webpack.common.js');
+const { client } = require('./webpack.common.js');
 
 const smp = new SpeedMeasurePlugin();
 
-module.exports = smp.wrap(merge(common, {
+module.exports = smp.wrap(merge(client, {
   mode: 'production',
   optimization: {
     minimizer: [new TerserPlugin({
@@ -29,5 +30,8 @@ module.exports = smp.wrap(merge(common, {
       verbose: true,
     }),
     new BundleAnalyzerPlugin(),
+    new MomentLocalesPlugin({
+      localesToKeep: ['es-us', 'ru'],
+    }),
   ],
 }));
