@@ -1,6 +1,10 @@
 {
   "name": "baldr",
   "private": true,
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
   "workspaces": {
     "packages": [ "packages/*" ],
     "nohoist": [ "**" ]
@@ -21,9 +25,5 @@
   },
   "devDependencies": {
     "lerna": "^3.17.0"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": ""
+  }
 }
