@@ -11,7 +11,10 @@ const ModalWindowCore = ({
   openModal,
   closeModal,
 }) => children({
-  openModal, closeModal, isOpen, id,
+  id,
+  isOpen,
+  openModal,
+  closeModal,
 });
 
 export const mapStateToProps = ({ modals }, { id }) => ({

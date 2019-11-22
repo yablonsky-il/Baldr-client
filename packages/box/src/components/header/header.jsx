@@ -39,6 +39,7 @@ const HeaderUI = ({
       ) : (
         <Profile
           className="d-flex align-items-center profile"
+          avatarClassName="mr-4"
           userProfile={userProfile}
           signOut={signOut}
         />

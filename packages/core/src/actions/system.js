@@ -3,11 +3,11 @@ import { createActions } from 'redux-actions';
 export const {
   openModal,
   closeModal,
-  showNotifications,
-  clearNotifications,
+  // showNotification,
+  // hideNotification,
 } = createActions(
   'OPEN_MODAL',
   'CLOSE_MODAL',
-  'SHOW_NOTIFICATIONS',
-  'HIDE_NOTIFICATIONS',
+  // 'SHOW_NOTIFICATION',
+  // 'HIDE_NOTIFICATION',
 );

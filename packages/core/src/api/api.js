@@ -23,4 +23,7 @@ import { API_PATH } from '../constants';
  * @property {object} - date
  * @property {object} - indicator
 */
-export const getEconomicDataByDate = (indicator, { day, month, year }) => `${API_PATH}/${indicator}/date/${day}-${month}-${year}`;
+export const getUrlEconomicDataByDate = (indicator, { day, month, year }) =>
+  `${API_PATH}/${indicator}/date/${day}-${month}-${year}`;
+
+export const getUrlFetchAllUsers = () => `${API_PATH}/messenger/get-all-users`;

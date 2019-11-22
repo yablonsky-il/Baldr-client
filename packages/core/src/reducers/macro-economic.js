@@ -16,7 +16,7 @@ const getInitialState = () => ({
   },
 });
 
-export const macroEconomicData = handleActions({
+export const macroEconomic = handleActions({
   [fetchEconomicData]: state => ({
     ...state,
     isInProgress: true,

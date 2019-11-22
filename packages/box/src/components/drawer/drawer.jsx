@@ -12,7 +12,7 @@ import { Header as HeaderCore } from 'core/components/header/header';
 import { IconMenu } from '../icons/icons-drawer/icon-menu';
 import { IconStatistic } from '../icons/icons-drawer/icon-statistic';
 import { IconHome } from '../icons/icons-drawer/icon-home';
-import { IconWebChat } from '../icons/icons-drawer/icon-web-chat';
+import { IconWebMessenger } from '../icons/icons-drawer/icon-web-messenger';
 import { SignIn } from '../header/sign-in/sign-in';
 import { SignUp } from '../header/sign-up/sign-up';
 import { Profile } from '../header/profile/profile';
@@ -21,8 +21,8 @@ import './drawer.scss';
 
 const listItems = [
   { item: 'Home', icon: <IconHome className="fill-gray" />, href: '/' },
-  { item: 'MEconomic Statistic', icon: <IconStatistic className="fill-gray" />, href: '/macro-economic/stocks' },
-  { item: 'WebChat', icon: <IconWebChat className="fill-gray" />, href: '/web-chat' },
+  { item: 'MEconomic statistic', icon: <IconStatistic className="fill-gray" />, href: '/macro-economic/stocks' },
+  { item: 'Web Messenger', icon: <IconWebMessenger className="fill-gray" />, href: '/web-messenger' },
 ];
 
 export const DrawerUI = ({
@@ -67,6 +67,7 @@ export const DrawerUI = ({
         ) : (
           <Profile
             className="d-flex justify-content-end align-items-center profile-drawer"
+            avatarClassName="mr-1"
             userProfile={userProfile}
             signOut={signOut}
           />

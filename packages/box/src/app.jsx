@@ -1,11 +1,15 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import MomentUtils from '@date-io/moment';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
+import MomentUtils from '@date-io/moment';
 import Container from '@material-ui/core/Container';
 
 import { Header } from './components/header/header';
-import { LoadableHome, LoadableMacroEconomic, LoadableWebChat } from './pages/routes';
+import {
+  LoadableHome,
+  LoadableMacroEconomic,
+  LoadableWebMessenger,
+} from './pages/routes';
 
 import './app.scss';
 
@@ -18,7 +22,7 @@ const AppUI = () => (
         <Switch>
           <Route exact path="/" component={LoadableHome} />
           <Route path="/macro-economic" component={LoadableMacroEconomic} />
-          <Route path="/web-chat" component={LoadableWebChat} />
+          <Route path="/web-messenger" component={LoadableWebMessenger} />
         </Switch>
         {/* <footer /> */}
       </main>

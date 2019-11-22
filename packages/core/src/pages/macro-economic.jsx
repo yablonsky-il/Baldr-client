@@ -102,7 +102,7 @@ export class MacroEconomicUI extends PureComponent {
 }
 
 const mapStateToProps = ({
-  macroEconomicData: {
+  macroEconomic: {
     isInProgress,
     economicData,
   },

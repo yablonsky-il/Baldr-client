@@ -1,6 +1,7 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+// const CopyWebpackPlugin = require('copy-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const autoprefixer = require('autoprefixer');
 
@@ -69,6 +70,7 @@ module.exports = {
       filename: 'index.html',
       template: path.join(CURRENT_DIRECTORY, 'public/index.html'),
     }),
+    // new CopyWebpackPlugin([{ from: path.resolve('public'), to: 'public/' }]),
     new MiniCssExtractPlugin({
       filename: 'styles/styles.css',
       publicPath: './',

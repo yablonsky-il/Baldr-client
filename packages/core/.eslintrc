@@ -63,9 +63,9 @@
     "react/jsx-one-expression-per-line": 0,
     "no-array-constructor": 0,
     "import/prefer-default-export": 0,
-    "react/jsx-no-bind": [2, {
-      "ignoreRefs": true
-    }],
+    // "react/jsx-no-bind": [2, {
+    //   "ignoreRefs": true
+    // }],
     "jest/no-disabled-tests": 2,
     "jest/expect-expect": 2,
     "jest/no-focused-tests": 2,

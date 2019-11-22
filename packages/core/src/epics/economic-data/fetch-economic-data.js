@@ -9,7 +9,7 @@ import {
   fetchEconomicData,
   setEconomicData,
 } from '../../actions/economic-data';
-import { getEconomicDataByDate } from '../../api/api';
+import { getUrlEconomicDataByDate } from '../../api/api';
 
 const indicatorsKeys = {
   stocks: 'stocks',
@@ -49,7 +49,7 @@ const serializeData = (economicData, indicator) => {
 export const fetchEconomicDataEpic = (action$, state$, { ajax }) => action$.pipe(
   ofType(fetchEconomicData),
   switchMap(({ payload: { indicator, date } }) => ajax({
-    url: getEconomicDataByDate(indicator, date),
+    url: getUrlEconomicDataByDate(indicator, date),
     method: 'GET',
   }).pipe(
     switchMap(({ response }) => R.compose(

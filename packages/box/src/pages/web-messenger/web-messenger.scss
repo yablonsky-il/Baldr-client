@@ -1,0 +1,19 @@
+.web-messenger {
+  &-select {
+    width: 200px;
+  }
+
+  &-user-list{
+    width: 35%;
+    border-right: 2px solid $solitude;
+  }
+
+  &-correspondence{
+    width: 65%;
+  }
+}
+
+
+.select-menu {
+  top: 118px !important;
+}
