@@ -1,6 +1,10 @@
 {
   "name": "baldr",
   "private": true,
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
   "workspaces": {
     "packages": [ "packages/*" ],
     "nohoist": [ "**" ]
@@ -20,10 +24,21 @@
     "ls": "lerna ls"
   },
   "devDependencies": {
-    "lerna": "^3.17.0"
+    "lerna": "^3.17.0",
+    "husky": "^3.1.0",
+    "@commitlint/cli": "7.5.0",
+    "@commitlint/config-conventional": "7.5.0",
+    "conventional-changelog-cli": "2.0.11"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": ""
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "[[ -n $HUSKY_BYPASS ]] || commitlint -E HUSKY_GIT_PARAMS",
+      "pre-push": "git branch | grep \"*\" | egrep -v \"^* master$\""
+    }
+  }
 }
