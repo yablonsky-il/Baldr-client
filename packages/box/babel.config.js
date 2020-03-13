@@ -8,6 +8,7 @@ module.exports = {
     '@babel/transform-runtime',
     '@babel/plugin-syntax-dynamic-import',
     '@loadable/babel-plugin',
+    'recharts',
     ['module-resolver', {
       root: ['./'],
       alias: {

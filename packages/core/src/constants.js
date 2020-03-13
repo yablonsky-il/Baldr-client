@@ -17,6 +17,14 @@ export const HTTP_CODES = {
   INTERNAL_SERVER_ERROR: 500,
 };
 
+export const SNACKBAR_VARIANTS = {
+  DEFAULT: 'default',
+  INFO: 'info',
+  WARNING: 'warning',
+  ERROR: 'error',
+  SUCCESS: 'success',
+};
+
 export const ERRORS = {
   UNDEFINED: 'UNDEFINED',
   AUTH_ERROR: 'AUTH_ERROR',
@@ -43,4 +51,3 @@ export const MODALS_ID = {
   SIGN_IN_MODAL: 'sign-in-modal',
   SIGN_UP_MODAL: 'sign-up-modal',
 };
-

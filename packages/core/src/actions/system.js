@@ -14,6 +14,7 @@ const getRedirectUrl = R.ifElse(isStatusMovedPermanently, R.prop('redirectUrl'),
 export const {
   globalError,
   clearError,
+  showNotification,
 } = createActions(
   {
     GLOBAL_ERROR: (errorId, error) => {
@@ -33,4 +34,5 @@ export const {
     },
   },
   'CLEAR_ERROR',
+  'SHOW_NOTIFICATION',
 );

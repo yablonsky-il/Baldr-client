@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, memo } from 'react';
 import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -6,6 +6,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
+import * as R from 'ramda';
 
 import { isEmptyOrNil } from 'core/helpers/util';
 
@@ -32,78 +33,90 @@ const getColumns = indicator => ([
 
 const ROWS_AMOUNT = 10;
 
-export const EconomicDataTable = ({
+export const EconomicDataTableUI = ({
   pathname,
-  economicData: {
-    data,
-    indicator,
+  macroEconomic: {
+    economicData: { data, indicator },
   },
 }) => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(ROWS_AMOUNT);
+
   useEffect(() => () => setPage(0), [pathname]);
 
-  if (isEmptyOrNil(data)) return null;
+  // console.log(data, 'data from table');
 
   const thValue = columnKeys[indicator];
 
-  function handleChangePage(event, newPage) {
+  const handleChangePage = (event, newPage) => {
     setPage(newPage);
-  }
+  };
 
-  function handleChangeRowsPerPage(event) {
+  const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(+event.target.value);
     setPage(0);
-  }
+  };
 
   return (
-    <Paper className="mt-2 economic-data-table">
-      <Table stickyHeader>
-        <TableHead>
-          <TableRow className="text-uppercase">
-            {getColumns(indicator).map(column => (
-              <TableCell
-                key={column.id}
-                style={{ minWidth: column.minWidth }}
-              >
-                {column.label}
-              </TableCell>
-            ))}
-          </TableRow>
-        </TableHead>
+    isEmptyOrNil(data)
+      ? null
+      : (
+        <Paper className="mt-2 w-50 economic-data-table">
+          <Table stickyHeader>
+            <TableHead>
+              <TableRow className="text-uppercase">
+                {getColumns(indicator).map(column => (
+                  <TableCell
+                    key={column.id}
+                    style={{ minWidth: column.minWidth }}
+                  >
+                    {column.label}
+                  </TableCell>
+                ))}
+              </TableRow>
+            </TableHead>
 
-        <TableBody>
-          {data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(rowData => (
-            <TableRow hover role="checkbox" tabIndex={-1} key={rowData.id}>
-              <TableCell>{rowData.id}</TableCell>
-              <TableCell>{rowData[thValue]}</TableCell>
-              <TableCell>{rowData.value}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
+            <TableBody>
+              {data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(rowData => (
+                <TableRow hover role="checkbox" tabIndex={-1} key={rowData.id}>
+                  <TableCell>{rowData.id}</TableCell>
+                  <TableCell>{rowData[thValue]}</TableCell>
+                  <TableCell>{rowData.value}</TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
 
-      <TablePagination
-        classes={{
-          select: 'pl-0 pl-sm-1',
-          selectRoot: 'mr-1 mr-sm-4',
-          actions: 'm-0 ml-sm-2_5 pagination-actions',
-          toolbar: 'px-0_5 px-sm-2',
-        }}
-        rowsPerPageOptions={[10, 25, 100]}
-        component="div"
-        count={data.length}
-        rowsPerPage={rowsPerPage}
-        page={page}
-        backIconButtonProps={{
-          'aria-label': 'previous page',
-        }}
-        nextIconButtonProps={{
-          'aria-label': 'next page',
-        }}
-        onChangePage={handleChangePage}
-        onChangeRowsPerPage={handleChangeRowsPerPage}
-      />
-    </Paper>
+          <TablePagination
+            classes={{
+              select: 'pl-0 pl-sm-1',
+              selectRoot: 'mr-1 mr-sm-4',
+              actions: 'm-0 ml-sm-2_5 pagination-actions',
+              toolbar: 'px-0_5 px-sm-2',
+            }}
+            rowsPerPageOptions={[10, 25, 100]}
+            component="div"
+            count={data.length}
+            rowsPerPage={rowsPerPage}
+            page={page}
+            backIconButtonProps={{
+              'aria-label': 'previous page',
+            }}
+            nextIconButtonProps={{
+              'aria-label': 'next page',
+            }}
+            onChangePage={handleChangePage}
+            onChangeRowsPerPage={handleChangeRowsPerPage}
+          />
+        </Paper>
+      )
   );
 };
+
+export const EconomicDataTable = memo(
+  EconomicDataTableUI,
+  (
+    { macroEconomic: { economicData: prevEconomicData } },
+    { macroEconomic: { economicData: currentEconomicData } },
+  ) => R.equals(prevEconomicData, currentEconomicData),
+);

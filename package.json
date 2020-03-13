@@ -6,8 +6,12 @@
   "license": "ISC",
   "description": "",
   "workspaces": {
-    "packages": [ "packages/*" ],
-    "nohoist": [ "**" ]
+    "packages": [
+      "packages/*"
+    ],
+    "nohoist": [
+      "**"
+    ]
   },
   "version": "1.0.0",
   "scripts": {

@@ -6,6 +6,27 @@ import { sendAuthenticationData, setAuthenticationStatus } from '../../actions/s
 import { setUserProfile } from '../../actions/profile';
 import { SIGN_IN_STATUSES, API_PATH } from '../../constants';
 
+// export const signInEpic = (action$, state$, { ajax }) =>
+//   action$.pipe(
+//     ofType(sendAuthenticationData),
+//     switchMap(({ payload: formData }) =>
+//       ajax({
+//         url: `${API_PATH}/sign-in`,
+//         method: 'POST',
+//         body: formData,
+//       }).pipe(
+//         switchMap(({ response: { status, message, profile } }) =>
+//           status === SIGN_IN_STATUSES.SUCCESS
+//             ? of(setUserProfile(profile), setAuthenticationStatus({ status, message }))
+//             : of(setAuthenticationStatus({ status, message }))),
+//       )),
+//     catchError((err) => {
+//       console.log(err, 'err authentication');
+
+//       return of(null);
+//     }),
+//   );
+
 export const signInEpic = (action$, state$, { ajax }) =>
   action$.pipe(
     ofType(sendAuthenticationData),
@@ -15,14 +36,18 @@ export const signInEpic = (action$, state$, { ajax }) =>
         method: 'POST',
         body: formData,
       }).pipe(
-        switchMap(({ response: { status, message, profile } }) =>
-          status === SIGN_IN_STATUSES.SUCCESS
+        switchMap(({ response }) => {
+          const { status, message, profile } = response;
+          console.log(response, 'responseresponseresponseresponse');
+
+          return status === SIGN_IN_STATUSES.SUCCESS
             ? of(setUserProfile(profile), setAuthenticationStatus({ status, message }))
-            : of(setAuthenticationStatus({ status, message })))
+            : of(setAuthenticationStatus({ status, message }));
+        }),
       )),
     catchError((err) => {
       console.log(err, 'err authentication');
 
       return of(null);
-    })
+    }),
   );

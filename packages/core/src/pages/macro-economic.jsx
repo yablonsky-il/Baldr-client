@@ -1,17 +1,18 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import * as R from 'ramda';
 
 import {
   fetchEconomicData as fetchEconomicDataAction,
+  setFetchStatus as setFetchStatusAction,
   clearEconomicData as clearEconomicDataAction,
 } from '../actions/economic-data';
 import { getDate, isEmptyOrNil } from '../helpers/util';
 
 const getParam = pathname => R.last(R.split('/')(pathname));
 
-export class MacroEconomicUI extends PureComponent {
+export class MacroEconomicUI extends Component {
   state = {
     selectedDate: new Date(),
     pathname: null,
@@ -26,6 +27,7 @@ export class MacroEconomicUI extends PureComponent {
     const indicator = getParam(currentPathname);
 
     if (!R.equals(currentPathname, prevPathname) && !isEmptyOrNil(indicator)) {
+      console.log('getDervied...');
       fetchEconomicData({
         date: getDate(state.selectedDate),
         indicator,
@@ -47,12 +49,28 @@ export class MacroEconomicUI extends PureComponent {
     const indicator = getParam(currentPathname);
 
     if (!isEmptyOrNil(indicator)) {
+      console.log('componentDidMount...');
       fetchEconomicData({
         date: getDate(selectedDate),
         indicator,
       });
     }
   }
+
+  // shouldComponentUpdate({
+  //   location: { pathname: prevPathname },
+  // },
+  // { selectedDate: prevSelectedDate }) {
+  //   const {
+  //     location: { pathname: currentPathname },
+  //   } = this.props;
+  //   const { selectedDate: currentSelectedDate } = this.state;
+  //   // console.log(prevPathname, currentPathname);
+  //   // console.log(!R.equals(prevPathname, currentPathname));
+
+  //   return !R.equals(prevPathname, currentPathname)
+  //     || !R.equals(prevSelectedDate, currentSelectedDate);
+  // }
 
   componentDidUpdate(prevProps, prevState) {
     const { selectedDate: prevDate } = prevState;
@@ -72,8 +90,9 @@ export class MacroEconomicUI extends PureComponent {
   }
 
   componentWillUnmount() {
-    const { clearEconomicData } = this.props;
+    const { clearEconomicData, setFetchStatus } = this.props;
 
+    setFetchStatus({ message: null, value: null });
     clearEconomicData();
   }
 
@@ -86,33 +105,28 @@ export class MacroEconomicUI extends PureComponent {
     const { selectedDate } = this.state;
     const {
       children,
-      isInProgress,
+      macroEconomic,
       location: { pathname },
-      economicData,
     } = this.props;
 
     return children({
       pathname,
       selectedDate,
-      isInProgress,
-      economicData,
+      macroEconomic,
       setDate: this.setDate,
     });
   }
 }
 
 const mapStateToProps = ({
-  macroEconomic: {
-    isInProgress,
-    economicData,
-  },
+  macroEconomic,
 }) => ({
-  isInProgress,
-  economicData,
+  macroEconomic,
 });
 
 const mapDispatchToProps = {
   fetchEconomicData: fetchEconomicDataAction,
+  setFetchStatus: setFetchStatusAction,
   clearEconomicData: clearEconomicDataAction,
 };
 

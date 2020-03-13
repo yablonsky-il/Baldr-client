@@ -1,6 +1,7 @@
 import React from 'react';
 import { matchRoutes } from 'react-router-config';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
+import { SnackbarProvider } from 'notistack';
 import MomentUtils from '@date-io/moment';
 import Container from '@material-ui/core/Container';
 
@@ -21,14 +22,16 @@ const AppUI = (props) => {
 
   return (
     <Container maxWidth="xl" className="vh-100 px-1 px-sm-2 px-md-3">
-      <MuiPickersUtilsProvider utils={MomentUtils}>
-        <Header />
-        <main>
-          {/* sidebar */}
-          {renderRoutes(routes)}
-          {/* <footer /> */}
-        </main>
-      </MuiPickersUtilsProvider>
+      <SnackbarProvider maxSnack={3}>
+        <MuiPickersUtilsProvider utils={MomentUtils}>
+          <Header />
+          <main>
+            {/* sidebar */}
+            {renderRoutes(routes)}
+            {/* <footer /> */}
+          </main>
+        </MuiPickersUtilsProvider>
+      </SnackbarProvider>
     </Container>
   );
 };

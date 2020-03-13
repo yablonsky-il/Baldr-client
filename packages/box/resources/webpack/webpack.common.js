@@ -119,6 +119,11 @@ const client = {
       'prop-types': path.resolve(path.join(CORE_PATH, 'prop-types')),
       '@loadable/component': path.resolve(path.join(CORE_PATH, '@loadable/component')),
       '@babel/runtime': path.resolve(path.join(CORE_PATH, '@babel/runtime')),
+      // recharts: path.resolve(path.join(CORE_PATH, 'recharts')),
+      'react-redux': path.resolve(path.join(CORE_PATH, 'react-redux')),
+      '@material-ui/core': path.resolve(path.join(CORE_PATH, '@material-ui/core')),
+      '@material-ui/lab': path.resolve(path.join(CORE_PATH, '@material-ui/lab')),
+      '@material-ui/pickers': path.resolve(path.join(CORE_PATH, '@material-ui/pickers')),
     },
   },
   plugins: [

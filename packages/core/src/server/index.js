@@ -21,8 +21,6 @@ export const initServer = (routes) => {
 
   // favicon.ico
   app.get('/favicon.ico', (req, res) => {
-    // res.sendFile('favicon.ico', { root: path.join(__dirname, './public/favicon') });
-    console.log(__dirname, 'dirname');
     res.sendFile('favicon.ico', { root: path.join(__dirname, './public') });
   });
 

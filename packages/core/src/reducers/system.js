@@ -6,7 +6,6 @@ import {
 import { ERRORS } from '../constants';
 
 export const initialState = () => ({
-  isSideMenuOpened: false,
   globalError: {},
   restrictions: null,
   settings: null,
